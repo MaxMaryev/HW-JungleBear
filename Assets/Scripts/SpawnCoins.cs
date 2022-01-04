@@ -9,7 +9,7 @@ public class SpawnCoins : MonoBehaviour
 
     private Transform[] _spawnCoinPoints;
 
-    private const string CoinTag = "Coin";
+    private const string _coinTag = "Coin";
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class SpawnCoins : MonoBehaviour
 
         while (isSpawning)
         {
-            GameObject[] coins = GameObject.FindGameObjectsWithTag(CoinTag);
+            GameObject[] coins = GameObject.FindGameObjectsWithTag(_coinTag);
 
             if (coins.Length == 0)
                 Instantiate(_coin, _spawnCoinPoints[Random.Range(0, _spawnCoinPoints.Length)].localPosition, Quaternion.identity);
