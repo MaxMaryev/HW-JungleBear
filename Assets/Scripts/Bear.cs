@@ -52,7 +52,6 @@ public class Bear : MonoBehaviour
         if (collision.TryGetComponent(out Coin coin))
         {
             Debug.Log(++_coinsCount);
-            coin.Take();
         }
     }
 
@@ -140,7 +139,7 @@ public class Bear : MonoBehaviour
 
     private void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        _animator.SetTrigger(_attackHash);
+        if (Input.GetKeyDown(KeyCode.F))
+            _animator.SetTrigger(_attackHash);
     }
 }

@@ -26,6 +26,6 @@ public class Camera : MonoBehaviour
         else if (_player.position.x > _rightBorderPosition.x)
             transform.position = _rightBorderPosition;
         else
-        transform.position = new Vector3(_player.position.x, _yCoordinate, _zCoordinate);
+            transform.position = new Vector3(_player.position.x, _yCoordinate, _zCoordinate);
     }
 }

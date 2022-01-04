@@ -17,10 +17,10 @@ public class Coin : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void Take()
+    public void BeTaken()
     {
         if (_isTaken == false)
-        StartCoroutine(DestroyWithEffects());
+            StartCoroutine(DestroyWithEffects());
 
         IEnumerator DestroyWithEffects()
         {
@@ -31,5 +31,11 @@ public class Coin : MonoBehaviour
             Destroy(gameObject);
             _isTaken = true;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Bear bear))
+            BeTaken();
     }
 }
