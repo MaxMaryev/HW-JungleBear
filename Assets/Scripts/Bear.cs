@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Rigidbody2D), typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
@@ -8,6 +9,7 @@ public class Bear : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    private UnityEvent _attackEvent = new UnityEvent();
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
@@ -17,9 +19,9 @@ public class Bear : MonoBehaviour
     private int _speedHash = Animator.StringToHash("Speed");
     private int _attackHash = Animator.StringToHash("Attack");
     private int _jumpHash = Animator.StringToHash("Jump");
-    private int _dieHash = Animator.StringToHash("Die");
     private Vector3 _leftBorderPosition, _rightBorderPosition;
-    private int _coinsCount = 0;
+
+    public Rigidbody2D Rigidbody => _rigidbody;
 
     private void Awake()
     {
@@ -44,14 +46,6 @@ public class Bear : MonoBehaviour
         Attack();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Coin coin))
-        {
-            Debug.Log(++_coinsCount);
-        }
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Indian indian))
@@ -70,17 +64,11 @@ public class Bear : MonoBehaviour
             _animator.SetTrigger(_attackHash);
             yield return null;
             _audioSource.Play();
-            indian.GetComponent<Rigidbody2D>().AddForce((Vector2.up + hitDirection) * _hitForce, ForceMode2D.Impulse);
-            Kill(indian);
-        }
-    }
 
-    private void Kill(Indian indian)
-    {
-        indian.StopAllCoroutines();
-        indian.GetComponent<Animator>().SetTrigger(_dieHash);
-        indian.GetComponent<BoxCollider2D>().enabled = false;
-        indian.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            _attackEvent.AddListener(indian.Die);
+            _attackEvent.Invoke();
+            _attackEvent.RemoveListener(indian.Die);
+        }
     }
 
     private void Jump()

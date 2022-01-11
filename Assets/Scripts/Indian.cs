@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(Animator), typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Indian : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -11,20 +13,42 @@ public class Indian : MonoBehaviour
     [SerializeField] private Bear _bear;
 
     private int _hitForce = 15;
-    private Coroutine _moveRight, _moveLeft;
+    private Rigidbody2D _rigidbody;
+    private Coroutine _moveRight, _moveLeft, _leftAttack, _rightAttack;
     private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
     private Animator _animator;
     private int _attackHash;
-    private WaitForSeconds _waitForThreeTenthSecond;
+    private int _dieHash;
+    private WaitForSeconds _wait;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _attackHash = Animator.StringToHash("Attack");
-        _waitForThreeTenthSecond = new WaitForSeconds(0.3f);
+        _dieHash = Animator.StringToHash("Die");
+        _wait = new WaitForSeconds(0.3f);
+    }
+
+    public void Die()
+    {
+        TryStopCoroutine(_moveLeft);
+        TryStopCoroutine(_moveRight);
+        TryStopCoroutine(_leftAttack);
+        TryStopCoroutine(_rightAttack);
+
+        _animator.SetTrigger(_dieHash);
+        GetComponent<BoxCollider2D>().enabled = false;
+        _rigidbody.bodyType = RigidbodyType2D.Static;
+    }
+
+    private void TryStopCoroutine(Coroutine coroutine)
+    {
+        if (coroutine != null)
+            StopCoroutine(coroutine);
     }
 
     private void OnTriggerEnter2D(Collider2D borderPoint)
@@ -48,19 +72,19 @@ public class Indian : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Bear bear))
         {
             if (_spriteRenderer.flipX == true)
-                StartCoroutine(Attack(bear, Vector2.right));
+                _rightAttack = StartCoroutine(Attack(bear, Vector2.right));
             else
-                StartCoroutine(Attack(bear, Vector2.left));
+                _leftAttack = StartCoroutine(Attack(bear, Vector2.left));
         }
     }
 
     private IEnumerator Attack(Bear bear, Vector2 hitDirection)
     {
-        yield return _waitForThreeTenthSecond;
+        yield return _wait;
         _animator.SetTrigger(_attackHash);
-        yield return _waitForThreeTenthSecond;
+        yield return _wait;
         _audioSource.Play();
-        bear.GetComponent<Rigidbody2D>().AddForce((Vector2.up + hitDirection) * _hitForce, ForceMode2D.Impulse);
+        bear.Rigidbody.AddForce((Vector2.up + hitDirection) * _hitForce, ForceMode2D.Impulse);
     }
 
     private IEnumerator Move(Vector3 direction, bool flip)

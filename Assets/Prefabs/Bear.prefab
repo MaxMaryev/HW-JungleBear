@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7036707830001486169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.5, y: 8.6, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -140,18 +140,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025939763, y: -0.42652273}
+  m_Offset: {x: -0.063706756, y: 0.0025574565}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.35, y: 2.13}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1.35, y: 2.13}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.1516414, y: 4.2669544}
+  m_Size: {x: 1.4867857, y: 2.2305899}
   m_EdgeRadius: 0
 --- !u!114 &8390801326752323763
 MonoBehaviour:
@@ -167,6 +167,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 20
+  _attackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2138746968, guid: dba7992fd0e97f144ba4661511273a9b, type: 3}
+        m_TargetAssemblyTypeName: Indian, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &116135629
 AudioSource:
   m_ObjectHideFlags: 0

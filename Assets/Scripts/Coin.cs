@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource), typeof(Animator))]
 public class Coin : MonoBehaviour
 {
-    [SerializeField] private SpawnCoins _spawnCoins;
+    [SerializeField] private CoinsSpawner _coinsSpawner;
 
     private AudioSource _audioSource;
     private Animator _animator;
