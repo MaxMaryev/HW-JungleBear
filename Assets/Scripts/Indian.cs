@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator), typeof(AudioSource))]
 public class Indian : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -13,8 +11,7 @@ public class Indian : MonoBehaviour
     [SerializeField] private Bear _bear;
 
     private int _hitForce = 15;
-    private Coroutine _moveRight;
-    private Coroutine _moveLeft;
+    private Coroutine _moveRight, _moveLeft;
     private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
     private Animator _animator;

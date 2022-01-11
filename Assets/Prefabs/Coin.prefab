@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7955c1e435b0084d9cd7efc559b66f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnCoins: {fileID: 8933671689774317369, guid: a86a945e9b3872e4ebab260251a3dd60, type: 3}
+  _thisCoin: {fileID: -6748881990785386473}
 --- !u!82 &-2719082132991637817
 AudioSource:
   m_ObjectHideFlags: 0

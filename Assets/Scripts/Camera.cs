@@ -7,8 +7,7 @@ public class Camera : MonoBehaviour
     [SerializeField] private Transform _player;
     private float _yCoordinate = 5;
     private float _zCoordinate = -10;
-    private Vector3 _leftBorderPosition;
-    private Vector3 _rightBorderPosition;
+    private Vector3 _leftBorderPosition, _rightBorderPosition;
 
     private void Awake()
     {

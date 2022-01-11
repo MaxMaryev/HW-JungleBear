@@ -8,8 +8,7 @@ public class SpawnCoins : MonoBehaviour
     [SerializeField] private Transform _spawnPointsParent;
 
     private Transform[] _spawnCoinPoints;
-
-    private const string ÑoinTag = "Coin";
+    private List<Coin> _coins = new List<Coin>();
 
     private void Awake()
     {
@@ -32,10 +31,10 @@ public class SpawnCoins : MonoBehaviour
 
         while (isSpawning)
         {
-            GameObject[] coins = GameObject.FindGameObjectsWithTag(ÑoinTag);
-
-            if (coins.Length == 0)
-                Instantiate(_coin, _spawnCoinPoints[Random.Range(0, _spawnCoinPoints.Length)].localPosition, Quaternion.identity);
+            if (_coins.Count == 0)
+                _coins.Add(Instantiate(_coin, _spawnCoinPoints[Random.Range(0, _spawnCoinPoints.Length)].localPosition, Quaternion.identity));
+            else if (_coins[0] == null)
+                _coins.RemoveAt(0);
 
             yield return new WaitForSeconds(1);
         }

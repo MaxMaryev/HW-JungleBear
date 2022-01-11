@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Rigidbody2D), typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public class Bear : MonoBehaviour
 {
@@ -20,8 +18,7 @@ public class Bear : MonoBehaviour
     private int _attackHash = Animator.StringToHash("Attack");
     private int _jumpHash = Animator.StringToHash("Jump");
     private int _dieHash = Animator.StringToHash("Die");
-    private Vector3 _leftBorderPosition;
-    private Vector3 _rightBorderPosition;
+    private Vector3 _leftBorderPosition, _rightBorderPosition;
     private int _coinsCount = 0;
 
     private void Awake()
