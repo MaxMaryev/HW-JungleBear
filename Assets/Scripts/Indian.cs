@@ -14,7 +14,10 @@ public class Indian : MonoBehaviour
 
     private int _hitForce = 15;
     private Rigidbody2D _rigidbody;
-    private Coroutine _moveRight, _moveLeft, _leftAttack, _rightAttack;
+    private Coroutine _moveRight;
+    private Coroutine _moveLeft;
+    private Coroutine _leftAttack;
+    private Coroutine _rightAttack;
     private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
     private Animator _animator;

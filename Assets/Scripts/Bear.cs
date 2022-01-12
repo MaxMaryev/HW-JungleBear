@@ -15,11 +15,11 @@ public class Bear : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private AudioSource _audioSource;
-    private int _hitForce = 5;
     private int _speedHash = Animator.StringToHash("Speed");
     private int _attackHash = Animator.StringToHash("Attack");
     private int _jumpHash = Animator.StringToHash("Jump");
-    private Vector3 _leftBorderPosition, _rightBorderPosition;
+    private Vector3 _leftBorderPosition;
+    private Vector3 _rightBorderPosition;
 
     public Rigidbody2D Rigidbody => _rigidbody;
 

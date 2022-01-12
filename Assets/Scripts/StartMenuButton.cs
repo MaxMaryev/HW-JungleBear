@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class StartMenuButton : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
